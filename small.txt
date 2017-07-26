@@ -1,1 +1,0 @@
-Hello,Things are just amazing, and one such is Erlang , I am trying to work on spelling or spell check in Erlang. Google uses spelling check in every search result and so am trying to take it to one level up and make it awesome.
