@@ -1,6 +1,6 @@
 # Spell-Checker
 - Inspired by the spelling checker in various Search-Engines, Office Packages and many more, here is an attempt to implement spelling-corrector in Erlang.
-- [Norvig](https://research.google.com/pubs/author205.html)(**Director of Research at Google Inc**) in 2007 had released the Toy Spelling Corrector in Python,achieving 80 or 90% accuracy at a processing speed of at least 10 words per second in about half a page of code.
+- [Norvig](https://research.google.com/pubs/author205.html)(**Director of Research at Google Inc**) in 2007 had released the Toy Spelling Corrector in Python(only 21 lines),achieving 80 or 90% accuracy at a processing speed of at least 10 words per second in about half a page of code.
 - He had released it after his two friends [Dean](https://en.wikipedia.org/wiki/Jeff_Dean_(computer_scientist)) and [Bill](https://en.wikipedia.org/wiki/Bill_Maris) were amazed at Google's spelling correction and did not have good intuitions about how the process works,though being highly accomplished engineers and mathematicians.
 
 ### Implementation
@@ -33,22 +33,26 @@ Did you mean?
 ["something","soothing"]
 ```
 ### Timer
-- For 1st Release
+- The time noted is the average of 6 outputs of timer function.
 <table>
 <tr>
-<td>Word</td>
-<td>Time(in seconds)</td>
+<td><b>Word</b></td>
+<td> <b>2nd</b> Release time(in seconds)</td>
+<td> <b>1st</b> Release time(in seconds)</td>
 </tr>
 <tr>
 <td>somthing</td>
+<td>4.525</td>
 <td>13.3</td>
 </tr>
 <tr>
 <td>seach</td>
+<td>4.46</td>
 <td>9.5</td>
 </tr>
 <tr>
 <td>helo</td>
+<td>4.5</td>
 <td>8.2</td>
 </tr>
 </table>
@@ -60,3 +64,7 @@ Did you mean?
 
 ### License
 - This repository is under [MIT License](https://github.com/mishal23/spell-check/blob/master/LICENSE)
+
+
+**FootNotes**
+- Norvig's original post [here](http://norvig.com/spell-correct.html)
