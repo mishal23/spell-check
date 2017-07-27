@@ -7,7 +7,7 @@
 - It takes reference of words from [big.txt](https://github.com/mishal23/spell-check/blob/master/big.txt) which has about a million words(The same was used by Norvig in his implementation of Spell-Corrector).
 - All the words of the file [big.txt](https://github.com/mishal23/spell-check/blob/master/big.txt) are splitted and saved as a list.
 - New list is formed with various edits from the 4 functions( ```deletion_edits```, ```transposition_edits```, ```alteration_edits```, ```insertion_edits```).
-- After which list is filtered by comparing the words of list formed by [big.txt](https://github.com/mishal23/spell-check/blob/master/big.txt) and the list formed by various edits, and returns a list with the similarities found. 
+- After which list is filtered by comparing the words of list formed by [big.txt](https://github.com/mishal23/spell-check/blob/master/big.txt) and the list formed by various edits, and returns a list with the similarities found.
 
 ### Steps to Run
 - Clone the repository after forking it and then head to the Erlang Shell.
@@ -16,16 +16,15 @@
 - Input a word in double quotes and check the recommendations given.
 - For my system after heading to Erlang Shell, it is as follows
 ```
-1> cd("C:/Users/Mishal Shah/Desktop/Erlang"). 
+1> cd("C:/Users/Mishal Shah/Desktop/Erlang").
 C:/Users/Mishal Shah/Desktop/Erlang
 ok
 2> c(check).                                  
-check.erl:8: Warning: variable 'Words_in_dictionary' is unused
 {ok,check}
 3> check:known("helo").
 Did you mean?
 ["felo","halo","held","hell","hello","helm","help","hero"]
-4>  check:known("seach"). 
+4>  check:known("seach").
 Did you mean?
 ["beach","each","reach","search","teach"]
 5>  check:known("somthing").
@@ -37,21 +36,25 @@ Did you mean?
 <table>
 <tr>
 <td><b>Word</b></td>
+<td> <b>3rd</b> Release time(in seconds)</td>
 <td> <b>2nd</b> Release time(in seconds)</td>
 <td> <b>1st</b> Release time(in seconds)</td>
 </tr>
 <tr>
 <td>somthing</td>
+<td>3.09</td>
 <td>4.525</td>
 <td>13.3</td>
 </tr>
 <tr>
 <td>seach</td>
+<td>3.05</td>
 <td>4.46</td>
 <td>9.5</td>
 </tr>
 <tr>
 <td>helo</td>
+<td>2.8</td>
 <td>4.5</td>
 <td>8.2</td>
 </tr>

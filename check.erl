@@ -2,10 +2,16 @@
 -export ([readfile/1,deletion_edits/1,transposition_edits/1,alteration_edits/1,insertion_edits/1,edits1/1,edits2/1,known/1]).
 
 % Read the whole file and makes a list of each word.
-readfile(FileName) -> {ok,Binary} = file:read_file(FileName),
-%                      re:split(binary_to_list(Binary), "[^a-zA-Z]").
-                      lists:usort(lists:map(fun(X) -> string:to_lower(binary_to_list(X)) end,(re:split(binary_to_list(Binary),"[^a-zA-Z]")))).
+%% 3rd Release:- Following code takes less time
+readfile(Filename) ->
+  {ok,Binary} = file:read_file(Filename),
+    Words = string:tokens(binary_to_list(Binary), " \v\t\r\n\'\"\\`1234567890-=!@#$%^&*()_+[]{};,./<>?:|"),
+    lists:usort(lists:map(fun(Word) -> string:to_lower(Word) end, Words)).
 
+%% 2nd Release:- Following code takes more time to read compared to the above one
+%readfile(FileName) -> {ok,Binary} = file:read_file(FileName),
+%%                      re:split(binary_to_list(Binary), "[^a-zA-Z]").
+%                      lists:usort(lists:map(fun(X) -> string:to_lower(binary_to_list(X)) end,(re:split(binary_to_list(Binary),"[^a-zA-Z]")))).
 letters() ->	"abcdefghijklmnopqrstuvwxyz".
 
 % Form list of words by deleting each letter from the word
