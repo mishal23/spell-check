@@ -58,27 +58,39 @@ edits2(Word) -> lists:usort(lists:foldr(fun(A, AccIn) -> AccIn ++ edits1(A) end,
 
 
 % Compares all the elements of the words obtained from big.txt and the words formed by edits and returns the possible list of words
-known(Word) ->  FinalDictionary = readfile("big.txt"),
-%                FinalDictionary = lists:map(fun(X) -> string:to_lower(binary_to_list(X)) end,Words_in_dictionary),
-                Error1_words = edits1(string:to_lower(Word)),
-%                Error2_words = edits1(string:to_lower(Word)),
-%                AppendedList = lists:usort(lists:append(Error1_words,Error2_words)),
-                SuggestedList = lists:filter(fun(X) -> lists:member(X,FinalDictionary) end,Error1_words),
-                case lists:member(string:to_lower(Word),SuggestedList) of
-                    true -> Word;
-                    false ->  case length(SuggestedList)=/=0 of
-                               true -> io:format("Did you mean?~n"),
-                                      SuggestedList;
-                               false -> Error2_words = edits2(string:to_lower(Word)), 
-                                        SuggestedList2 = lists:filter(fun(X) -> lists:member(X,FinalDictionary) end,Error2_words),
-                                        case lists:member(string:to_lower(Word),SuggestedList2) of
-                                          true -> Word;
-                                          false ->  case length(SuggestedList2)=:=0 of
-                                                      true -> Word;
-                                                      false -> io:format("Did you mean?~n"), 
-                                                            SuggestedList2
-                                                    end
-                                        end
-                              end
-                end.
+known(Word) ->  
+    FinalDictionary = readfile("big.txt"),
+    % Always compare lowercase words
+    LowerWord = string:to_lower(Word),
+    %                FinalDictionary = lists:map(fun(X) -> string:to_lower(binary_to_list(X)) end,Words_in_dictionary),
+    Error1_words = edits1(LowerWord),
+    %                Error2_words = edits1(string:to_lower(Word)),
+    %                AppendedList = lists:usort(lists:append(Error1_words,Error2_words)),
+    SuggestedList = words_in_list(FinalDictionary, Error1_words),
+    case lists:member(LowerWord,SuggestedList) of
+        true -> Word;
+        false ->
+            case length(SuggestedList)=/=0 of
+                true ->
+                    prompt(SuggestedList);
+                false ->
+                    Error2_words = edits2(LowerWord),
+                    SuggestedList2 = words_in_list(FinalDictionary, Error2_words),
+                    case lists:member(LowerWord,SuggestedList2) of
+                      true ->
+                        Word;
+                      false ->
+                        case length(SuggestedList2)=:=0 of
+                          true -> Word;
+                          false -> prompt(SuggestedList2)
+                    end
+                end
+            end
+    end.
 
+words_in_list(Words, List) ->
+  lists:filter(fun(X) -> lists:member(X,List) end, Words).
+
+prompt(SuggestedList) ->
+  io:format("Did you mean?~n"),
+  SuggestedList.
