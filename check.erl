@@ -1,5 +1,5 @@
 -module (check).
--export ([readfile/1,deletion_edits/1,transposition_edits/1,alteration_edits/1,insertion_edits/1,edits1/1,edits2/1,known/1]).
+-export ([readfile/1,deletion_edits/1,transposition_edits/1,alteration_edits/1,insertion_edits/1,edits1/1,edits2/1,known/1,add/1]).
 
 % Read the whole file and makes a list of each word.
 %% 3rd Release:- Following code takes less time
@@ -94,3 +94,14 @@ words_in_list(Words, List) ->
 prompt(SuggestedList) ->
   io:format("Did you mean?~n"),
   SuggestedList.
+
+% Adds missing words to File "big.txt" only if it is not present in the file
+add(Word) ->
+    Words_in_dictionary = readfile("big.txt"),
+    case lists:member(Word,Words_in_dictionary) of
+      true -> io:format("Word already present~n");
+      false ->  
+              {ok, File} = file:open("big.txt", [append]),
+              file:write(File," " ++ Word),
+              io:format("Thank You!~nWord added to dictionary~n")
+    end.
