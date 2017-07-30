@@ -1,6 +1,6 @@
 -module (check).
 -export ([readfile/1,deletion_edits/1,transposition_edits/1,alteration_edits/1,insertion_edits/1,edits1/1,edits2/1,known/1,add/1]).
-
+-define (FileName, "big.txt").
 % Read the whole file and makes a list of each word.
 %% 3rd Release:- Following code takes less time
 readfile(Filename) ->
@@ -59,7 +59,7 @@ edits2(Word) -> lists:usort(lists:foldr(fun(A, AccIn) -> AccIn ++ edits1(A) end,
 
 % Compares all the elements of the words obtained from big.txt and the words formed by edits and returns the possible list of words
 known(Word) ->  
-    FinalDictionary = readfile("big.txt"),
+    FinalDictionary = readfile(?FileName),
     % Always compare lowercase words
     LowerWord = string:to_lower(Word),
     %                FinalDictionary = lists:map(fun(X) -> string:to_lower(binary_to_list(X)) end,Words_in_dictionary),
@@ -97,11 +97,11 @@ prompt(SuggestedList) ->
 
 % Adds missing words to File "big.txt" only if it is not present in the file
 add(Word) ->
-    Words_in_dictionary = readfile("big.txt"),
+    WordsInDictionary = readfile(?FileName),
     case lists:member(Word,Words_in_dictionary) of
       true -> io:format("Word already present~n");
       false ->  
-              {ok, File} = file:open("big.txt", [append]),
+              {ok, File} = file:open(?FileName, [append]),
               file:write(File," " ++ Word),
               io:format("Thank You!~nWord added to dictionary~n")
     end.
