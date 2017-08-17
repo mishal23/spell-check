@@ -3,16 +3,11 @@
 -define (FileName, "big.txt").
 
 % Read the whole file and makes a list of each word.
-%% 3rd Release:- Following code takes less time
 readfile(Filename) ->
   {ok,Binary} = file:read_file(Filename),
     Words = string:tokens(binary_to_list(Binary), " \v\t\r\n\'\"\\`1234567890-=!@#$%^&*()_+[]{};,./<>?:|"),
     lists:usort(lists:map(fun(Word) -> string:to_lower(Word) end, Words)).
 
-%% 2nd Release:- Following code takes more time to read compared to the above one
-%readfile(FileName) -> {ok,Binary} = file:read_file(FileName),
-%%                      re:split(binary_to_list(Binary), "[^a-zA-Z]").
-%                      lists:usort(lists:map(fun(X) -> string:to_lower(binary_to_list(X)) end,(re:split(binary_to_list(Binary),"[^a-zA-Z]")))).
 letters() ->	"abcdefghijklmnopqrstuvwxyz".
 
 % Form list of words by deleting each letter from the word
@@ -63,10 +58,7 @@ known(Word) ->
     FinalDictionary = readfile(?FileName),
     % Always compare lowercase words
     LowerWord = string:to_lower(Word),
-    %                FinalDictionary = lists:map(fun(X) -> string:to_lower(binary_to_list(X)) end,Words_in_dictionary),
     Error1_words = edits1(LowerWord),
-    %                Error2_words = edits1(string:to_lower(Word)),
-    %                AppendedList = lists:usort(lists:append(Error1_words,Error2_words)),
     SuggestedList = words_in_list(FinalDictionary, Error1_words),
     case lists:member(LowerWord,SuggestedList) of
         true -> Word;

@@ -15,7 +15,7 @@
 - Compile it.
 - Input a word in double quotes and check the recommendations given.
 - For my system after heading to Erlang Shell, it is as follows
-```
+```erlang
 1> cd("C:/Users/Mishal Shah/Desktop/Erlang").
 C:/Users/Mishal Shah/Desktop/Erlang
 ok
