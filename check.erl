@@ -140,7 +140,7 @@ add(Word) ->
   case lists:member(Word,WordsInDictionary) of
     true -> io:format("Word already present~n");
     false ->
-            {ok, File} = file:open(?FileName, [append]),
-            file:write(File," " ++ Word),
-            io:format("Thank You!~nWord added to dictionary~n")
+      {ok, File} = file:open(?FileName, [append]),
+      file:write(File," " ++ Word),
+      io:format("Thank You!~nWord added to dictionary~n")
   end.
